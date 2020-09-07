@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // import HomePage from 'containers/HomePage/Loadable';
 import MainPage from 'containers/MainPage/Loadable';
+import AddPage from 'containers/AddPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Nav from 'components/Nav';
 
@@ -23,6 +24,7 @@ export default function App() {
       <Nav />
       <Switch>
         <Route exact path="/" component={MainPage} />
+        <Route exact path="/add" component={AddPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

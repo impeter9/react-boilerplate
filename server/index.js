@@ -1,6 +1,7 @@
 /* eslint consistent-return:0 import/order:0 */
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const logger = require('./logger');
 
 const argv = require('./argv');
@@ -14,12 +15,20 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
-const strings = ['a', 'b'];
+const strings = ['a', 'b', 'c'];
+
+app.use(bodyParser.json());
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
-app.use('/api', (req, res) => {
-  res.send(strings);
+app.get('/api', (req, res) => {
+  res.status(200).send(strings);
+});
+
+app.post('/api', (req, res) => {
+  // console.log('New string added: ', req.body.string);
+  strings.push(req.body.string);
+  res.status(200).send(strings);
 });
 
 // In production we need to pass these values in instead of relying on webpack

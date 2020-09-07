@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Nav = () => (
   <header className="main-navigation">
     <div className="main-navigation__logo">
-      <h1>ListAdder</h1>
+      <h1>StringAdder</h1>
     </div>
     <div className="main-navigation__items">
       <ul>
