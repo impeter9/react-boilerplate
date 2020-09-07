@@ -21,5 +21,11 @@ const makeSelectMainPage = () =>
     substate => substate,
   );
 
+const makeStringsSelector = () =>
+  createSelector(
+    selectMainPageDomain,
+    substate => substate.strings,
+  );
+
 export default makeSelectMainPage;
-export { selectMainPageDomain };
+export { selectMainPageDomain, makeStringsSelector };

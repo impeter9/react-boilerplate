@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -14,14 +14,22 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectMainPage from './selectors';
+import { makeStringsSelector } from './selectors';
+import { loadStrings } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-export function MainPage() {
+export function MainPage(props) {
   useInjectReducer({ key: 'mainPage', reducer });
   useInjectSaga({ key: 'mainPage', saga });
+
+  useEffect(() => {
+    // load strings
+    props.loadStrings();
+  }, []);
+
+  // const { strings } = props;
 
   return (
     <div>
@@ -35,16 +43,17 @@ export function MainPage() {
 }
 
 MainPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  strings: PropTypes.array,
+  loadStrings: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  mainPage: makeSelectMainPage(),
+  strings: makeStringsSelector(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    loadStrings: () => dispatch(loadStrings()),
   };
 }
 
