@@ -18,13 +18,13 @@ const selectMainPageDomain = state => state.mainPage || initialState;
 const makeSelectMainPage = () =>
   createSelector(
     selectMainPageDomain,
-    substate => substate,
+    subState => subState,
   );
 
 const makeStringsSelector = () =>
   createSelector(
     selectMainPageDomain,
-    substate => substate.strings,
+    subState => subState.strings,
   );
 
 export default makeSelectMainPage;

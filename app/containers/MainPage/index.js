@@ -29,7 +29,7 @@ export function MainPage(props) {
     props.loadStrings();
   }, []);
 
-  // const { strings } = props;
+  const { strings } = props;
 
   return (
     <div>
@@ -38,6 +38,11 @@ export function MainPage(props) {
         <meta name="description" content="Description of MainPage" />
       </Helmet>
       <FormattedMessage {...messages.header} />
+      <ul>
+        {strings.map(string => (
+          <li key={string}>{string}</li>
+        ))}
+      </ul>
     </div>
   );
 }

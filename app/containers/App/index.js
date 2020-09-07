@@ -8,22 +8,24 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // import HomePage from 'containers/HomePage/Loadable';
 import MainPage from 'containers/MainPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import Nav from 'components/Nav';
 
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
   return (
-    <div>
+    <Router>
+      <Nav />
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
-    </div>
+    </Router>
   );
 }
