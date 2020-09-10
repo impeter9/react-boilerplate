@@ -49,7 +49,6 @@ export function AddPage(props) {
         <title>AddPage</title>
         <meta name="description" content="Description of AddPage" />
       </Helmet>
-      {/* <FormattedMessage {...messages.header} /> */}
       <AddForm onSubmit={handleSubmit}>
         <label>
           Add a string to the list:

@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -18,15 +18,29 @@ import { makeStringsSelector } from './selectors';
 import { loadStrings } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import List from '../../components/List';
 
 export const MainDiv = styled.div`
   position: fixed;
   top: 4rem;
 `;
 
+export const StyledButton = styled.button`
+  background-color: ${props => props.color};
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+`;
+
 export function MainPage(props) {
   useInjectReducer({ key: 'mainPage', reducer });
   useInjectSaga({ key: 'mainPage', saga });
+
+  const [listColor, setListColor] = useState('red');
 
   useEffect(() => {
     // load strings
@@ -34,6 +48,14 @@ export function MainPage(props) {
   }, []);
 
   const { strings } = props;
+  const handleColorChangeRed = e => {
+    e.preventDefault();
+    setListColor('red');
+  };
+  const handleColorChangeBlue = e => {
+    e.preventDefault();
+    setListColor('blue');
+  };
 
   return (
     <MainDiv>
@@ -41,11 +63,13 @@ export function MainPage(props) {
         <title>MainPage</title>
         <meta name="description" content="Description of MainPage" />
       </Helmet>
-      <ul>
-        {strings.map(string => (
-          <li key={string}>{string}</li>
-        ))}
-      </ul>
+      <StyledButton color="red" onClick={handleColorChangeRed}>
+        Red
+      </StyledButton>
+      <StyledButton color="blue" onClick={handleColorChangeBlue}>
+        Blue
+      </StyledButton>
+      <List strings={strings} listColor={listColor} />
     </MainDiv>
   );
 }
