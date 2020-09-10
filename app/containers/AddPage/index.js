@@ -8,17 +8,27 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import styled from 'styled-components';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-// import makeSelectAddPage from './selectors';
 import { postString } from './actions';
 import reducer from '../MainPage/reducer';
 import saga from '../MainPage/saga';
-import messages from './messages';
+
+export const MainDiv = styled.div`
+  position: fixed;
+  top: 4rem;
+`;
+
+export const AddForm = styled.form`
+  margin: 0.5rem;
+  input {
+    margin: 0.1rem;
+  }
+`;
 
 export function AddPage(props) {
   useInjectReducer({ key: 'mainPage', reducer });
@@ -34,13 +44,13 @@ export function AddPage(props) {
   };
 
   return (
-    <div>
+    <MainDiv>
       <Helmet>
         <title>AddPage</title>
         <meta name="description" content="Description of AddPage" />
       </Helmet>
-      <FormattedMessage {...messages.header} />
-      <form onSubmit={handleSubmit}>
+      {/* <FormattedMessage {...messages.header} /> */}
+      <AddForm onSubmit={handleSubmit}>
         <label>
           Add a string to the list:
           <input
@@ -50,8 +60,8 @@ export function AddPage(props) {
           />
         </label>
         <input type="submit" value="Submit" />
-      </form>
-    </div>
+      </AddForm>
+    </MainDiv>
   );
 }
 

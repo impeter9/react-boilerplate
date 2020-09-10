@@ -15,20 +15,21 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
-const strings = ['a', 'b', 'c'];
+const strArr = ['a', 'b', 'c'];
 
 app.use(bodyParser.json());
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 app.get('/api', (req, res) => {
-  res.status(200).send(strings);
+  // get endpoint to fetch all strings
+  res.status(200).send(strArr);
 });
 
 app.post('/api', (req, res) => {
-  // console.log('New string added: ', req.body.string);
-  strings.push(req.body.string);
-  res.status(200).send(strings);
+  // post endpoint to prepend a new strings to the array
+  strArr.push(req.body.string);
+  res.status(200).send(strArr);
 });
 
 // In production we need to pass these values in instead of relying on webpack
