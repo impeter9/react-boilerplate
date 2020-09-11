@@ -14,11 +14,12 @@ import styled from 'styled-components';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeStringsSelector } from './selectors';
+import { makeStringsSelector, makeLoadingSelector } from './selectors';
 import { loadStrings } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import List from '../../components/List';
+import Spinner from '../../components/Spinner';
 
 export const MainDiv = styled.div`
   position: fixed;
@@ -69,7 +70,12 @@ export function MainPage(props) {
       <StyledButton color="blue" onClick={handleColorChangeBlue}>
         Blue
       </StyledButton>
-      <List strings={strings} listColor={listColor} />
+      {props.loading ? (
+        <Spinner />
+      ) : (
+        <List strings={strings} listColor={listColor} />
+      )}
+      {/* <List strings={strings} listColor={listColor} /> */}
     </MainDiv>
   );
 }
@@ -77,10 +83,12 @@ export function MainPage(props) {
 MainPage.propTypes = {
   strings: PropTypes.array,
   loadStrings: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   strings: makeStringsSelector(),
+  loading: makeLoadingSelector(),
 });
 
 function mapDispatchToProps(dispatch) {

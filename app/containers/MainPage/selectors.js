@@ -27,5 +27,11 @@ const makeStringsSelector = () =>
     subState => subState.strings,
   );
 
+const makeLoadingSelector = () =>
+  createSelector(
+    selectMainPageDomain,
+    subState => subState.loading,
+  );
+
 export default makeSelectMainPage;
-export { selectMainPageDomain, makeStringsSelector };
+export { selectMainPageDomain, makeStringsSelector, makeLoadingSelector };
