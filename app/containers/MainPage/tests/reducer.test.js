@@ -7,7 +7,9 @@ describe('mainPageReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      strings: [],
+      loading: false,
+      error: true,
     };
   });
 

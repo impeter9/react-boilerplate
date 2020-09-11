@@ -3,13 +3,16 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-// import { take, call, put, select } from 'redux-saga/effects';
-// import mainPageSaga from '../saga';
+import { call } from 'redux-saga/effects';
+import request from 'utils/request';
+import { loadStrings } from '../saga';
 
-// const generator = mainPageSaga();
+const generator = loadStrings();
 
 describe('mainPageSaga Saga', () => {
   it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+    expect(generator.next().value).toEqual(
+      call(request, `http://localhost:3000/api`),
+    );
   });
 });

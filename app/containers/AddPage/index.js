@@ -53,6 +53,7 @@ export function AddPage(props) {
         <label>
           Add a string to the list:
           <input
+            value={string}
             type="text"
             name="string"
             onChange={e => setString(e.target.value)}

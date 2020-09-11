@@ -48,7 +48,8 @@ export function MainPage(props) {
     props.loadStrings();
   }, []);
 
-  const { strings } = props;
+  // const { strings } = props;
+  const strings = props.strings || [];
   const handleColorChangeRed = e => {
     e.preventDefault();
     setListColor('red');
@@ -75,7 +76,6 @@ export function MainPage(props) {
       ) : (
         <List strings={strings} listColor={listColor} />
       )}
-      {/* <List strings={strings} listColor={listColor} /> */}
     </MainDiv>
   );
 }
